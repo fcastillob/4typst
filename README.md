@@ -33,7 +33,8 @@ El archivo `theorems.typ` es código de [sahasatvik](https://github.com/sahasatv
 2. Elegir la pestaña que se quiera usar
     - Compilar typst requiere tener typst instalado
 3. Elegir el archivo
+    - **Van a ocurrir errores si alguna carpeta en la dirección tiene espacios**
 4. Compilar o transformar el archivo
 5. *Comprobar posibles errores*
 
-Los teoremas se van a exportar correctamente si en LaTeX se definen como `\newtheorem{*}{*}`.
+Los teoremas se van a exportar correctamente si en LaTeX se definen como `\newtheorem{*}{*}[*]`.
