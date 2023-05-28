@@ -26,6 +26,9 @@ El archivo `theorems.typ` es código de [sahasatvik](https://github.com/sahasatv
 
 # Uso
 
+0. Descargar el repositorio
+    - Si se tiene `git` instalado, escribir en alguna terminal `git clone https://github.com/fcastillob/4typst`
+    - Si no, basta con ir a ese botoncito verde arriba que dice *Code* y descargar un `.zip`.
 1. Ejecutar el archivo `main.py`.
 2. Elegir la pestaña que se quiera usar
     - Compilar typst requiere tener typst instalado
