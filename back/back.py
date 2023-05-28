@@ -44,10 +44,16 @@ class Back(QObject):
         thm = self.obtener_teoremas()
         self.modificar_filtro(thm)
 
-        ruta_typ = self.ruta_tex[:-3] + "typ"
-        res = subprocess.getoutput(f"pandoc -L filtro_tmp.lua -f latex -t typst -s {self.ruta_tex} > {ruta_typ}")
+        ruta_tex_aux = self.ruta_tex.replace(" ", "\ ")
+        ruta_typ = ruta_tex_aux[:-3] + "typ"
+        print(ruta_tex_aux)
+        print(ruta_typ)
+        res = subprocess.getoutput(f"pandoc -L filtro_tmp.lua -f latex -t typst -s {ruta_tex_aux} > {ruta_typ}")
+        print(res)
         # se lee de nuevo para no tomar en cuenta errores de pandoc
         info_archivo = "#import \"theorems.typ\": *\n\n"
+        ruta_typ = self.ruta_tex[:-3] + "typ"
+        print(ruta_typ)
         with open(ruta_typ, "r") as file:
             for line in file:
                 if "sectionnumbering: none" in line:
@@ -55,12 +61,14 @@ class Back(QObject):
                 else:
                     info_archivo += line
         info_archivo = info_archivo.replace("#strong[].", "")
+        info_archivo = info_archivo.replace(", width: \\textwidth", "")
         with open(ruta_typ, "w") as file:
             file.write(info_archivo)
 
         self.copiar_archivo_teoremas_typ(thm)
 
         self.senal_cambiar_label_convertir.emit(ruta_typ)
+        print("Éxito")
 
     def copiar_archivo_teoremas_typ(self, teoremas: list[tuple]):
         ruta_para_theorems = path.join(path.dirname(self.ruta_tex), "theorems.typ")
