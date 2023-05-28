@@ -36,3 +36,4 @@ El archivo `theorems.typ` es código de [sahasatvik](https://github.com/sahasatv
 4. Compilar o transformar el archivo
 5. *Comprobar posibles errores*
 
+Los teoremas se van a exportar correctamente si en LaTeX se definen como `\newtheorem{*}{*}`.
