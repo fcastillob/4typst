@@ -45,16 +45,13 @@ class Back(QObject):
         self.modificar_filtro(thm)
 
         ruta_typ = self.ruta_tex[:-3] + "typ"
-        ruta_pandoc = path.abspath("pandoc")
-        print(ruta_pandoc)
-        res = subprocess.getoutput(f"{ruta_pandoc} -L filtro_tmp.lua -f latex -t typst -s {self.ruta_tex} > {ruta_typ}")
-        print(res)
+        res = subprocess.getoutput(f"pandoc -L filtro_tmp.lua -f latex -t typst -s {self.ruta_tex} > {ruta_typ}")
         # se lee de nuevo para no tomar en cuenta errores de pandoc
         info_archivo = "#import \"theorems.typ\": *\n\n"
         with open(ruta_typ, "r") as file:
             for line in file:
                 if "sectionnumbering: none" in line:
-                    info_archivo += "  sectionnumbering: \"1.\"\n"
+                    info_archivo += "  sectionnumbering: \"1.\",\n"
                 else:
                     info_archivo += line
         info_archivo = info_archivo.replace("#strong[].", "")
@@ -84,9 +81,10 @@ class Back(QObject):
         teoremas = set()
         with open(self.ruta_tex, "r") as file:
             for line in file:
-                if "newtheorem" in line.strip():
+                if "newtheorem{" in line.strip():
                     teoremas.add(line.strip())
         keys_display = []
+        print(teoremas)
         for line in teoremas:
             key = re.findall("newtheorem{(.*)}{", line)[0]
             display = re.findall("}{(.*)}$", line)[0]

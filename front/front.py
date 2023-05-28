@@ -69,7 +69,7 @@ class CompileWidget(QWidget):
         self.compilar_watch.resize(self.compilar_watch.sizeHint())
 
         self.errores = QLabel(self)
-        self.mi_label = QLabel("sas", self)
+        self.mi_label = QLabel("Archivo .typ:", self)
 
         ui = QVBoxLayout()
         ui.addStretch(1)
