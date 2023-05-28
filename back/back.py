@@ -55,7 +55,8 @@ class Back(QObject):
             for line in file:
                 if "sectionnumbering: none" in line:
                     info_archivo += "  sectionnumbering: \"1.\"\n"
-                info_archivo += line
+                else:
+                    info_archivo += line
         info_archivo = info_archivo.replace("#strong[].", "")
         with open(ruta_typ, "w") as file:
             file.write(info_archivo)
