@@ -94,9 +94,11 @@ class Back(QObject):
         keys_display = []
         print(teoremas)
         for line in teoremas:
+            print(line)
             key = re.findall("newtheorem{(.*)}{", line)[0]
-            display = re.findall("}{(.*)}$", line)[0]
+            display = re.findall("}{(.*)}", line)[0]
             keys_display.append((key, display))
+        print(keys_display)
         return keys_display
 
     def modificar_filtro(self, teoremas: list[tuple]):
