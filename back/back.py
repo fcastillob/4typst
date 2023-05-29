@@ -48,7 +48,7 @@ class Back(QObject):
         ruta_typ = ruta_tex_aux[:-3] + "typ"
         print(ruta_tex_aux)
         print(ruta_typ)
-        res = subprocess.getoutput(f"pandoc -L filtro_tmp.lua -f latex -t typst -s {ruta_tex_aux} > {ruta_typ}")
+        res = subprocess.getoutput(f"pandoc -L filtro_tmp.lua -f latex -t typst -s \"{ruta_tex_aux}\" > \"{ruta_typ}\"")
         print(res)
         # se lee de nuevo para no tomar en cuenta errores de pandoc
         info_archivo = "#import \"theorems.typ\": *\n\n"
@@ -79,7 +79,7 @@ class Back(QObject):
                 info_raw += line
         info_raw += "\n\n"
         for tupla in teoremas:
-            info_raw += f"#let {tupla[0]} = thmbox(\"thm\", \"{tupla[1]}\", fill: rgb(\"eeffee\"))\n\n"
+            info_raw += f"#let {tupla[0]} = thmbox(\"thm\", \"{tupla[1]}\")\n\n"
         with open(ruta_para_theorems, "w") as file:
             file.write(info_raw)
 
