@@ -44,11 +44,9 @@ class Back(QObject):
         thm = self.obtener_teoremas()
         self.modificar_filtro(thm)
 
-        ruta_tex_aux = self.ruta_tex.replace(" ", "\ ")
-        ruta_typ = ruta_tex_aux[:-3] + "typ"
-        print(ruta_tex_aux)
-        print(ruta_typ)
-        res = subprocess.getoutput(f"pandoc -L filtro_tmp.lua -f latex -t typst -s \"{ruta_tex_aux}\" > \"{ruta_typ}\"")
+        ruta_typ = self.ruta_tex[:-3] + "typ"
+        print(f"pandoc -L filtro_tmp.lua -f latex -t typst -s \"{self.ruta_tex}\" > \"{ruta_typ}\"")
+        res = subprocess.getoutput(f"pandoc -L filtro_tmp.lua -f latex -t typst -s \"{self.ruta_tex}\" > \"{ruta_typ}\"")
         print(res)
         # se lee de nuevo para no tomar en cuenta errores de pandoc
         info_archivo = "#import \"theorems.typ\": *\n\n"
